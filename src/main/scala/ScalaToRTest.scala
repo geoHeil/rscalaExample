@@ -7,7 +7,7 @@ object ScalaToRTest extends App {
   val x = Uniform(50, 60).sample(1000)
   val eta = x map { xi => (xi * 0.1) - 3 }
   val mu = eta map {
-    math.exp(_)
+    math.exp
   }
   val y = mu map {
     Poisson(_).draw
@@ -74,13 +74,12 @@ object ScalaToRTest extends App {
   R.y_true = Array(0, 1, 0, 0, 1)
   R.y_predicted = Array(0, 1, 1, 0, 0)
   R.eval("evalResult <- evaluateAllTheThings(y_true, y_predicted)")
+  val evalRes: (Any, String) = R.get("evalResult")
 
-  // TODO properly extract the vector
-  /** should be of the following format
-    * Error rate   Accuracy      kappa       f1_R      AUC_R
-    *0.4000000  0.6000000  0.1666667  0.6666667  0.5833333
-    */
+  case class MeasureUnit(name: String, value: Double)
 
-  val evalRes = R.get("evalResult")
-  print(evalRes)
+  val ms = Seq("Error rate", "Accuracy", "Cohens Kappa", "F1", "AUC")
+
+  var named = (ms, evalRes._1.asInstanceOf[Array[Double]]).zipped.map { (m, a) => MeasureUnit(m, a) }
+  print(named)
 }

@@ -43,5 +43,6 @@ java.lang.NullPointerException
         at java.lang.reflect.Method.invoke(Method.java:498)
 ```
 ## calling a function
-- TODO not working yet
+- see the sample code in the scala file
+- works just fine
 
