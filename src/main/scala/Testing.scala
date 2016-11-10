@@ -65,22 +65,22 @@ object ScalaToRTest extends App {
       |
       |    evalA[[index]] <- f1
       |    evalA[[index+1]] <- auc
-      |    evalA
+      |
+      |    unlist(evalA)
       |}
     """.stripMargin
   )
-  // TODO not working
-  //  val snippet = "evalResult <- evaluateAllTheThings(groundTruth, prediction)"
-  //  R.set("groundTruth", Array(0, 1, 0, 0, 1))
-  //  R.set("prediction", Array(0, 1, 1, 0, 0))
-  //  R.eval(snippet, false)
-  //
-  //  R.get("evalResult")
-  //  R.getD0("evalResult")
 
   R.y_true = Array(0, 1, 0, 0, 1)
   R.y_predicted = Array(0, 1, 1, 0, 0)
   R.eval("evalResult <- evaluateAllTheThings(y_true, y_predicted)")
+
+  // TODO properly extract the vector
+  /** should be of the following format
+    * Error rate   Accuracy      kappa       f1_R      AUC_R
+    *0.4000000  0.6000000  0.1666667  0.6666667  0.5833333
+    */
+
   val evalRes = R.get("evalResult")
   print(evalRes)
 }
