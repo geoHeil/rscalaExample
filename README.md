@@ -5,6 +5,7 @@ I try to get scala to talk to R. The rscala package seems to be nice, however I 
 ```
 git clone https://dahl-git.byu.edu/dahl/rscala.git
 cd rscala
+git checkout f561a84c985b1ee0ba115e397d69b996f484a817
 sbt +publishM2
 ```
 This builds the packages.
@@ -40,3 +41,4 @@ java.lang.NullPointerException
         at java.lang.reflect.Method.invoke(Method.java:498)
 ```
 Do you have any Ideas what is going wrong?
+

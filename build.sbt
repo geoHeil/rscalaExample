@@ -8,9 +8,11 @@ scalaVersion := "2.11.8"
 libraryDependencies  ++= Seq(
             "org.scalanlp" %% "breeze" % "0.12",
             "org.scalanlp" %% "breeze-natives" % "0.12",
-            "org.ddahl" %% "rscala" % "1.0.14-SNAPSHOT"
+            "org.ddahl" %% "rscala" % "1.0.13"
+            //"org.ddahl" %% "rscala" % "1.0.14-SNAPSHOT"
 )
 
 resolvers += Resolver.mavenLocal
 
-//unmanagedJars in Compile += file("/home/ndjw1/R/x86_64-pc-linux-gnu-library/3.2/rscala/java/rscala_2.11-1.0.6.jar")
+// finally got rid of this
+//unmanagedJars in Compile += file("/usr/local/Cellar/r/3.3.2/Frameworks/R.framework/Resources/site-library/rscala/java/rscala_2.11-1.0.13.jar")
