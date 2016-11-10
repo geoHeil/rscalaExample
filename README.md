@@ -10,7 +10,9 @@ sbt +publishM2
 ```
 This builds the packages.
     
-Then executing a sbt run in this project produces this error
+Then executing a sbt run in this project produces no longer an error. 
+
+The latest version (SNAPSHOT) results in the following error
 
 ```
 java.lang.NullPointerException
