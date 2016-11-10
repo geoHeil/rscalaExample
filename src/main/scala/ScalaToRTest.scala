@@ -2,6 +2,9 @@ import breeze.linalg._
 import breeze.stats.distributions._
 import org.ddahl.rscala.RClient
 
+import scala.collection.JavaConverters._
+import scala.collection.mutable.ArrayBuffer
+
 object ScalaToRTest extends App {
   // first simulate some data consistent with a Poisson regression model
   val x = Uniform(50, 60).sample(1000)
@@ -71,7 +74,11 @@ object ScalaToRTest extends App {
     """.stripMargin
   )
 
-  R.y_true = Array(0, 1, 0, 0, 1)
+  val jul: java.util.List[Int] = ArrayBuffer(0, 1, 1, 0, 1).asJava
+
+  val buf: Array[Int] = jul.asScala.toArray
+  R.y_true = buf
+  //R.y_true = Array(0, 1, 0, 0, 1)
   R.y_predicted = Array(0, 1, 1, 0, 0)
   R.eval("evalResult <- evaluateAllTheThings(y_true, y_predicted)")
   val evalRes: (Any, String) = R.get("evalResult")
