@@ -69,12 +69,18 @@ object ScalaToRTest extends App {
       |}
     """.stripMargin
   )
+  // TODO not working
+  //  val snippet = "evalResult <- evaluateAllTheThings(groundTruth, prediction)"
+  //  R.set("groundTruth", Array(0, 1, 0, 0, 1))
+  //  R.set("prediction", Array(0, 1, 1, 0, 0))
+  //  R.eval(snippet, false)
+  //
+  //  R.get("evalResult")
+  //  R.getD0("evalResult")
 
-  val snippet = "evalResult <- evaluateAllTheThings(groundTruth, prediction)"
-  R.set("groundTruth", Array(0, 1, 0, 0, 1))
-  R.set("prediction", Array(0, 1, 1, 0, 0))
-  R.eval(snippet, false)
-
-  R.get("evalResult")
-  R.getD0("evalResult")
+  R.y_true = Array(0, 1, 0, 0, 1)
+  R.y_predicted = Array(0, 1, 1, 0, 0)
+  R.eval("evalResult <- evaluateAllTheThings(y_true, y_predicted)")
+  val evalRes = R.get("evalResult")
+  print(evalRes)
 }
