@@ -11,11 +11,9 @@ object ScalaToRTest {
     val eta = x map { xi => (xi * 0.1) - 3 }
     val mu = eta map { math.exp(_) }
     val y = mu map { Poisson(_).draw }
-    println(y)
 
     // call to R to fit the Poission regression model
     val R = RClient() // initialise an R interpreter
-    println("RRRR")
     R.x=x.toArray // send x to R
     R.y=y.toArray // send y to R
     R.eval("mod <- glm(y~x,family=poisson())") // fit the model in R
