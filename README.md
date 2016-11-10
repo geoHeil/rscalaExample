@@ -1,6 +1,10 @@
 # interfacing R with scala
 
-I try to get scala to talk to R. The rscala package seems to be nice, however I am facing a strange problem:
+I try to get scala to talk to R. The rscala package seems to be nice.
+
+** Required **
+- R from CRAN
+- the desired packages already installed
 
 ```
 git clone https://dahl-git.byu.edu/dahl/rscala.git
